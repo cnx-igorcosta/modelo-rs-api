@@ -3,6 +3,7 @@ import mongoose from 'mongoose'
 import morgan from 'morgan'
 import bodyParser from 'body-parser'
 import config from 'config'
+//import cors from 'cors'
 
 import { searchModelos } from './app/routes/search.js'
 import { getModelosRs, postModeloRs, getModeloRs, deleteModeloRs, putModeloRs } from './app/routes/modeloRs.js'
@@ -28,6 +29,20 @@ if(config.util.getEnv('NODE_ENV') !== 'test') {
   app.use(morgan('combined')) //'combined' outputs the Apache style LOGs
 }
 
+const allowCrossDomain = (req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+
+    // intercept OPTIONS method
+    if ('OPTIONS' == req.method) {
+      res.send(200);
+    }
+    else {
+      next();
+    }
+};
+app.use(allowCrossDomain)
 //parse application/json and look for raw text
 app.use(bodyParser.json())
 app.use(bodyParser.text())
