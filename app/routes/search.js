@@ -3,9 +3,9 @@ import ModeloRs from '../models/modeloRs'
 
 // POST /searchModelos
 const searchModelos = (req, res) => {
-    let busca = req.body.busca
+    let busca = req.body.data.busca
     if(busca) {
-        busca = adicionarSinonimos(busca)
+        //busca = adicionarSinonimos(busca)
         ModeloRs.find({$text: {$search: busca}})
            .exec((err, modelos) => {
             if(err) { error(err, res) }
@@ -13,6 +13,8 @@ const searchModelos = (req, res) => {
                 res.json(modelos)
             }
         })
+    } else {
+        res.json([])
     }
 }
 

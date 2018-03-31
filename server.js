@@ -29,20 +29,16 @@ if(config.util.getEnv('NODE_ENV') !== 'test') {
   app.use(morgan('combined')) //'combined' outputs the Apache style LOGs
 }
 
-const allowCrossDomain = (req, res, next) => {
+app.all('*', (req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
-
-    // intercept OPTIONS method
+    res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    res.header('Access-Control-Allow-Headers', 'crossDomain, Content-type');
     if ('OPTIONS' == req.method) {
-      res.send(200);
-    }
-    else {
+    res.sendStatus(200);
+    } else {
       next();
     }
-};
-app.use(allowCrossDomain)
+  });
 //parse application/json and look for raw text
 app.use(bodyParser.json())
 app.use(bodyParser.text())
