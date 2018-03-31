@@ -16,8 +16,9 @@ const options = {
     connectTimeoutMS: 30000,
 };
 
+const uri = process.env.MONGODB_URI || config.DBHost
 //db connection
-mongoose.connect(config.DBHost, options)
+mongoose.connect(uri, options)
 const db = mongoose.connection
 db.on('error', console.error.bind(console, 'connection error:'))
 
