@@ -4,6 +4,7 @@ import morgan from 'morgan'
 import bodyParser from 'body-parser'
 import config from 'config'
 
+import { searchModelos } from './app/routes/search.js'
 import { getModelosRs, postModeloRs, getModeloRs, deleteModeloRs, putModeloRs } from './app/routes/modeloRs.js'
 
 const app = express()
@@ -33,6 +34,9 @@ app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json({type: 'application/json'}))
 
 app.get('/', (req, res) => res.json({message: 'Bem vindo ao cérebro da Google das RS!'}))
+
+app.route('/searchModelos')
+    .post(searchModelos)
 
 app.route('/modeloRs')
     .get(getModelosRs)

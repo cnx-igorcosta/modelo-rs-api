@@ -11,6 +11,16 @@ const ModeloRsSchema = new Schema(
         observacao: { type: String }
     }
 )
+ModeloRsSchema.index(
+    {
+        descricao: 'text', 
+        grupo: 'text', 
+        ambiente: 'text'
+    }, 
+    {"weights": { descricao: 3, ambiente: 2, grupo:1 }},
+    { default_language: "portuguese" }
+
+)
 
 const ModeloRs = mongoose.model('modeloRs', ModeloRsSchema)
 export default ModeloRs

@@ -4,7 +4,14 @@
   "description": "api rest para aplicação modelo-rs (Google das RS)",
   "main": "server.js",
   "scripts": {
-    "start": "NODE_ENV=dev && nodemon server.js --exec babel-node",
+    "dev": "NODE_ENV=dev && nodemon server.js --exec babel-node",
+    "prd": "NODE_ENV=prd node ./dist/server.js",
+    "clean": "rm -rf dist && mkdir dist && mkdir ./dist/app && mkdir ./dist/config",
+    "build-app": "babel -d ./dist/app app",
+    "build-config": "babel -d ./dist/config config",
+    "build-server": "babel -d ./dist/ server.js",
+    "start": "npm run build && npm run prd",
+    "build": "npm run clean && npm run build-config && npm run build-app && npm run build-server",
     "test": "./node_modules/mocha/bin/mocha test/*.js --require babel-register --reporter spec || exit 0"
   },
   "repository": {
