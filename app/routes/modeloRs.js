@@ -14,7 +14,7 @@ const getModelosRs = (req, res) => {
 
 // POST /modeloRS
 const postModeloRs = (req, res) => {
-    const newModeloRs = new ModeloRs(req.body)
+    const newModeloRs = new ModeloRs(req.body.data)
     newModeloRs.save((err, modeloRs) => {
         if(err) { error(err) }
         else {
