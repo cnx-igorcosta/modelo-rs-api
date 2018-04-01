@@ -44,11 +44,15 @@ const deleteModeloRs = (req, res) => {
 // PUT /modeloRs/:id
 const putModeloRs = (req, res) => {
     ModeloRs.findById({_id: req.params._id}, (err, modeloRs) => {
-        if(err) { error(err, res) } 
-        Object.assign(modeloRs, req.body).save((err, modeloRS) => {
-          if(err) { error(err, res) }
-          res.json({ sucesso: true, modeloRS })
-        })
+        if(err) { error(err, res) }
+        else{
+            Object.assign(modeloRs, req.body.data).save((err, modeloRSAtualizado) => {
+                if(err) { error(err, res) }
+                else {
+                    res.json({ sucesso: true, modeloRs: modeloRSAtualizado })
+                }
+            })
+        } 
       })
 }
 
