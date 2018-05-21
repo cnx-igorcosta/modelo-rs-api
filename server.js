@@ -3,7 +3,7 @@ import mongoose from 'mongoose'
 import morgan from 'morgan'
 import bodyParser from 'body-parser'
 import config from 'config'
-//import cors from 'cors'
+import cors from 'cors'
 
 import { searchModelos } from './app/routes/search.js'
 import { getModelosRs, postModeloRs, getModeloRs, deleteModeloRs, putModeloRs } from './app/routes/modeloRs.js'
@@ -29,10 +29,11 @@ if(config.util.getEnv('NODE_ENV') !== 'test') {
   app.use(morgan('combined')) //'combined' outputs the Apache style LOGs
 }
 
+app.use(cors());
 app.all('*', (req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, crossDomain');
     res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-    res.header('Access-Control-Allow-Headers', 'crossDomain, Content-type');
     if ('OPTIONS' == req.method) {
     res.sendStatus(200);
     } else {
@@ -56,7 +57,7 @@ app.route('/modeloRs')
 
 app.route('/modeloRs/:_id')
     .get(getModeloRs)
-    .delete(deleteModeloRs)    
+    .delete(deleteModeloRs)
     .put(putModeloRs)
 
 app.listen(port)
