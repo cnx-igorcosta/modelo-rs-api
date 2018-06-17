@@ -4,10 +4,13 @@ const Schema = mongoose.Schema
 const ModeloRsSchema = new Schema(
     {
         numero: { type: Number, required: true},
+        tipo: { type: String, default: 'RS' },
         descricao: { type: String, required: true },
         grupo: { type: String },
+        numeroRdm: { type: Number, required: true},
         ambiente: { type: String, default: 'dsv' },
         deAcordo: { type: Boolean, default: false },
+        precisaRs: { type: Boolean, default: false },
         observacao: { type: String }
     }
 )
