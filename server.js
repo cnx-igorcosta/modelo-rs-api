@@ -3,7 +3,7 @@ import mongoose from 'mongoose'
 import morgan from 'morgan'
 import bodyParser from 'body-parser'
 import config from 'config'
-import cors from 'cors'
+//import cors from 'cors'
 
 import { searchModelos } from './app/routes/search.js'
 import { getModelosRs, postModeloRs, getModeloRs, deleteModeloRs, putModeloRs } from './app/routes/modeloRs.js'
@@ -29,7 +29,7 @@ if(config.util.getEnv('NODE_ENV') !== 'test') {
   app.use(morgan('combined')) //'combined' outputs the Apache style LOGs
 }
 
-app.use(cors());
+//app.use(cors());
 app.all('*', (req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, crossDomain');
