@@ -7,7 +7,7 @@ const ModeloRsSchema = new Schema(
         tipo: { type: String, default: 'RS' },
         descricao: { type: String, required: true },
         grupo: { type: String },
-        numeroRdm: { type: Number, required: true},
+        numeroRdm: { type: Number },
         ambiente: { type: String, default: 'dsv' },
         deAcordo: { type: Boolean, default: false },
         precisaRs: { type: Boolean, default: false },
