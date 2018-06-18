@@ -16,7 +16,7 @@ const getModelosRs = (req, res) => {
 const postModeloRs = (req, res) => {
     const newModeloRs = new ModeloRs(req.body.data)
     newModeloRs.save((err, modeloRs) => {
-        if(err) { error(err) }
+        if(err) { error(err, res) }
         else {
             res.json({sucesso: true, modeloRs})
         }
@@ -57,6 +57,7 @@ const putModeloRs = (req, res) => {
 }
 
 function error(err, res) {
+    console.log(err)
     let retorno = {
         erro: true,
         err
